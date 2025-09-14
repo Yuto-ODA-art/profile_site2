@@ -9,19 +9,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    
     <style>
         /* カスタムスタイル */
         body {
             font-family: 'Noto Sans JP', sans-serif;
-            background-color: #ffffff; /* 背景を白に変更 */
-            color: #374151; /* 基本テキストカラーをダークグレーに変更 */
+            background-color: #ffffff;
+            color: #374151;
         }
-
         .font-title {
             font-family: 'Montserrat', sans-serif;
         }
         
-        /* --- アニメーション --- */
+        /* --- スライドショーの画像の高さを調整 --- */
+        .splide__slide img {
+            width: 100%;
+            height: 60vh; /* ビューポートの高さの60% */
+            object-fit: cover; /* 画像の比率を保ったまま領域を埋める */
+        }
+        
+        /* --- ギャラリーのアニメーション --- */
         .gallery-item {
             opacity: 0;
             transform: translateY(20px);
@@ -63,7 +72,7 @@
 </head>
 <body class="bg-white">
 
-    <aside class="hidden md:flex flex-col w-64 h-screen px-10 py-8 bg-white fixed border-r border-gray-200">
+    <aside class="hidden md:flex flex-col w-64 h-screen px-10 py-8 bg-white fixed border-r border-gray-200 z-10">
         <h1 class="text-2xl font-bold font-title text-gray-800">Yuto</h1>
         <nav class="flex flex-col mt-10 space-y-4">
             <a href="#gallery" class="text-gray-600 hover:text-gray-900 transition">Works</a>
@@ -82,19 +91,29 @@
         </button>
         <div id="mobile-menu" class="hidden fixed inset-0 bg-white pt-20 z-40">
             <nav class="flex flex-col items-center space-y-8 text-xl">
-                 <a href="#gallery" class="text-gray-600 hover:text-gray-900 transition menu-link">Works</a>
-                 <a href="#about" class="text-gray-600 hover:text-gray-900 transition menu-link">About</a>
-                 <a href="#contact" class="text-gray-600 hover:text-gray-900 transition menu-link">Contact</a>
+                <a href="#gallery" class="text-gray-600 hover:text-gray-900 transition menu-link">Works</a>
+                <a href="#about" class="text-gray-600 hover:text-gray-900 transition menu-link">About</a>
+                <a href="#contact" class="text-gray-600 hover:text-gray-900 transition menu-link">Contact</a>
             </nav>
         </div>
     </header>
 
     <main class="md:ml-64 pt-16 md:pt-0">
-        <div class="p-4 md:p-12">
+        
+        <section class="splide" aria-label="写真スライドショー">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    <li class="splide__slide"><img src="Image.jfif" alt="青と草原"></li>
+                    <li class="splide__slide"><img src="Image (1).jfif" alt="木の森"></li>
+                    <li class="splide__slide"><img src="Image (2).jfif" alt="松島からの視点"></li>
+                    <li class="splide__slide"><img src="Image (3).jfif" alt="青と黄色"></li>
+                </ul>
+            </div>
+        </section>
 
+        <div class="p-4 md:p-12">
             <section id="gallery">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
-                    
                     <div class="gallery-item cursor-pointer">
                         <img src="Image.jfif" alt="青と草原" class="w-full h-auto" onclick="openModal(this.src, this.alt)">
                     </div>
@@ -104,36 +123,35 @@
                     <div class="gallery-item cursor-pointer">
                         <img src="Image (2).jfif" alt="松島からの視点" class="w-full h-auto" onclick="openModal(this.src, this.alt)">
                     </div>
-                     <div class="gallery-item cursor-pointer">
+                    <div class="gallery-item cursor-pointer">
                         <img src="Image (3).jfif" alt="青と黄色" class="w-full h-auto" onclick="openModal(this.src, this.alt)">
                     </div>
-
                 </div>
             </section>
             
             <section id="about" class="py-20 md:py-32">
-                 <div class="container mx-auto px-6 max-w-3xl text-center">
-                     <h2 class="text-2xl md:text-3xl font-bold mb-4 font-title">About</h2>
-                     <p class="text-base text-gray-600 leading-relaxed">
-                         はじめまして。フォトグラファーのYutoです。
-                         カメラを片手に、日常に潜む美しい瞬間や、心に残った風景を切り取っています。
-                         一枚一枚の写真に込めた物語を感じていただけたら嬉しいです。
-                     </p>
-                 </div>
+                <div class="container mx-auto px-6 max-w-3xl text-center">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4 font-title">About</h2>
+                    <p class="text-base text-gray-600 leading-relaxed">
+                        はじめまして。フォトグラファーのYutoです。
+                        カメラを片手に、日常に潜む美しい瞬間や、心に残った風景を切り取っています。
+                        一枚一枚の写真に込めた物語を感じていただけたら嬉しいです。
+                    </p>
+                </div>
             </section>
             
             <section id="contact" class="py-20 md:py-32 bg-gray-50">
-                 <div class="container mx-auto px-6 text-center">
-                     <h2 class="text-2xl md:text-3xl font-bold mb-4 font-title">Contact</h2>
-                     <p class="text-base text-gray-600 mb-8 max-w-xl mx-auto">
+                <div class="container mx-auto px-6 text-center">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4 font-title">Contact</h2>
+                    <p class="text-base text-gray-600 mb-8 max-w-xl mx-auto">
                         撮影のご依頼や、写真に関するご質問など、お気軽にご連絡ください。
-                     </p>
-                     <div class="flex justify-center space-x-6">
-                         <a href="#" class="text-gray-500 hover:text-gray-900 text-2xl transition"><i class="fab fa-instagram"></i></a>
-                         <a href="#" class="text-gray-500 hover:text-gray-900 text-2xl transition"><i class="fab fa-x-twitter"></i></a>
-                         <a href="mailto:your-email@example.com" class="text-gray-500 hover:text-gray-900 text-2xl transition"><i class="fas fa-envelope"></i></a>
-                     </div>
-                 </div>
+                    </p>
+                    <div class="flex justify-center space-x-6">
+                        <a href="#" class="text-gray-500 hover:text-gray-900 text-2xl transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-gray-900 text-2xl transition"><i class="fab fa-x-twitter"></i></a>
+                        <a href="mailto:your-email@example.com" class="text-gray-500 hover:text-gray-900 text-2xl transition"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
             </section>
         </div>
     </main>
@@ -146,7 +164,22 @@
         <p id="modal-caption" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-lg bg-black bg-opacity-50 px-4 py-2 rounded-md"></p>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+
     <script>
+        // --- スライドショーの初期化 ---
+        document.addEventListener('DOMContentLoaded', function () {
+            new Splide('.splide', {
+                type        : 'loop',       // ループさせる
+                autoplay    : true,         // 自動再生を有効にする
+                interval    : 4000,         // 自動再生の間隔 (4秒)
+                pauseOnHover: true,         // カーソルが乗ったら自動再生を停止
+                arrows      : true,         // 左右の矢印を表示
+                pagination  : true,         // ページネーション（下の丸いボタン）を表示
+                drag        : true,         // ドラッグ操作を有効にする
+            }).mount();
+        });
+
         // --- モバイルメニューの制御 ---
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -164,7 +197,6 @@
             }
         });
         
-        // メニュー項目クリックでメニューを閉じる
         menuLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
@@ -200,13 +232,7 @@
         // --- スクロールに応じたアニメーション ---
         document.addEventListener('DOMContentLoaded', () => {
             const galleryItems = document.querySelectorAll('.gallery-item');
-            
-            const options = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
+            const options = { root: null, rootMargin: '0px', threshold: 0.1 };
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -215,13 +241,10 @@
                     }
                 });
             }, options);
-
             galleryItems.forEach(item => {
                 observer.observe(item);
             });
         });
     </script>
 </body>
-
 </html>
-
